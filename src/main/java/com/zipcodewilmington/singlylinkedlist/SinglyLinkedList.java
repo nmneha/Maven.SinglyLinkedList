@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by leon on 1/10/18.
  */
-public class SinglyLinkedList<T>{
+public class SinglyLinkedList<T extends Comparable>{
 
     class Node {
         private T data;
@@ -36,11 +36,13 @@ public class SinglyLinkedList<T>{
 
     private Node head;
     private Node tail;
+    private int size;
 
 
     SinglyLinkedList() {
         this.head = null;
         this.tail = null;
+        int size = 0;
     }
 
     public void add(T data) {
@@ -53,6 +55,7 @@ public class SinglyLinkedList<T>{
             current = current.next;
         }
         current.next = new Node(data);
+        size ++;
     }
 
     public void remove(int index) {
@@ -147,6 +150,29 @@ public class SinglyLinkedList<T>{
         }
         copied.add(node.data);
         return copied;
+    }
+
+    public SinglyLinkedList<T> sort() {
+        SinglyLinkedList<T> sorted = new SinglyLinkedList<>();
+        Node current = head;
+        Node temp = new Node(head.data);
+        Node next = head.next;
+        for (int i = 0; i < size-1; i++) {
+            for (int j = 0; j < size - 1; j++) {
+                if (next == null) {
+                    break;
+                }
+                if (current.data.compareTo(next.data) > 0) {
+                    temp.data = current.data;
+                    current.data = next.data;
+                    next.data = temp.data;
+                }
+                current = head;
+                next = current.next;
+            }
+            sorted.head = head;
+        }
+        return sorted;
     }
 
     public void printSingely() {

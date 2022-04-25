@@ -94,6 +94,18 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(15, data);
     }
 
+    @Test
+    public void sort() {
+        SinglyLinkedList<Integer> singly = new SinglyLinkedList<>();
+        singly.add(15);
+        singly.add(5);
+        singly.add(20);
+        SinglyLinkedList<Integer> sorted = singly.sort();
+        int data = sorted.get(1);
+        sorted.printSingely();
+        Assert.assertEquals(15, data);
+    }
+
 
 
 
