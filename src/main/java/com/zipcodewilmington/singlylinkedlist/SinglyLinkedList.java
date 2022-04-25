@@ -140,7 +140,7 @@ public class SinglyLinkedList<T>{
     public SinglyLinkedList<T> copyDeep() {
         SinglyLinkedList<T> copied = new SinglyLinkedList<>();
         Node node;
-        node = head.next;
+        node = head;
         while (node.next != null) {
             copied.add(node.data);
             node = node.next;
