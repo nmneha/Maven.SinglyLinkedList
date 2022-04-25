@@ -6,21 +6,21 @@ import java.util.List;
 /**
  * Created by leon on 1/10/18.
  */
-public class SinglyLinkedList{
+public class SinglyLinkedList<T>{
 
     class Node {
-        private int data;
+        private T data;
         private Node next;
 
-        public Node(int data) {
+        public Node(T data) {
             this.data = data;
         }
 
-        public int getData() {
+        public T getData() {
             return data;
         }
 
-        public void setData(int data) {
+        public void setData(T data) {
             this.data = data;
         }
 
@@ -43,7 +43,7 @@ public class SinglyLinkedList{
         this.tail = null;
     }
 
-    public void add(int data) {
+    public void add(T data) {
         Node current = head;
         if (head == null) {
             head = new Node(data);
@@ -73,7 +73,7 @@ public class SinglyLinkedList{
          }
     }
 
-    public boolean contains(int data) {
+    public boolean contains(T data) {
         Node current = head;
         if (head != null) {
             if(head.data == data) {
@@ -89,7 +89,7 @@ public class SinglyLinkedList{
         return false;
     }
 
-    public int find(int data) {
+    public int find(T data) {
         Node current = head;
         int index = 0;
         while (current.next != null) {
@@ -114,10 +114,10 @@ public class SinglyLinkedList{
         return size;
     }
 
-    public int get(int index) {
+    public T get(int index) {
         Node current = head;
         int count = 0;
-        if (head == null) return (Integer) null;
+        if (head == null) return null;
         if (index == 0) {
             return head.data;
         }
@@ -128,7 +128,39 @@ public class SinglyLinkedList{
             current = current.next;
             count++;
         }
-        return (Integer) null;
+        return null;
+    }
+
+    public SinglyLinkedList copyShallow(SinglyLinkedList original) {
+        SinglyLinkedList copy = new SinglyLinkedList();
+        copy.head = original.head;
+        return copy;
+    }
+
+    public SinglyLinkedList<T> copyDeep() {
+        SinglyLinkedList<T> copied = new SinglyLinkedList<>();
+        Node node;
+        node = head.next;
+        while (node.next != null) {
+            copied.add(node.data);
+            node = node.next;
+        }
+        copied.add(node.data);
+        return copied;
+    }
+
+    public void printSingely() {
+        Node current = head;
+        while (current.next != null) {
+            System.out.println("Data: " + current.data +
+                    "\n----------");
+            current = current.next;
+        }
+        if (current.next == null) {
+            System.out.println("Data: " + current.data +
+                    "\n----------");
+        }
+
     }
 
 
